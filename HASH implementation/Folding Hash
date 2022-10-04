@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll unsigned long long int
+void foldinghash(int ts,ll n)
+{
+    ts=ts-1;//if ts=100 then index will be from 0 to 99 therfore count of table size is2
+    int temp=ts,p=1;
+    int digts=0;
+    ll sum=0,ans;
+    while(ts!=0)//counting digits in tablesize
+    {
+        ts/=10;
+        digts++;//digits in tablesize
+    }
+   for(int i=1;i<=digts;i++)
+   {
+     p*=10;//10^digts
+   }
+    while(n!=0)
+    {
+        sum+=(n%p);//adding last 2 digits of n and updating it as n/p
+        n/=p;
+    }
+    ans=sum%p;//getting 2 digit from sum as digit in ts is 2
+   ans=ans%temp;/*if ts=101 then 100 m 3 digit count hoti then ans like 161 but 161
+does not exist therefore 161%100 then last 2 digit */
+    cout<<ans;
+
+}
+int main()
+{
+    int ts;
+    unsigned long long int n;
+    cin>>ts;
+    cin>>n;
+    foldinghash(ts,n);
+    
+}
