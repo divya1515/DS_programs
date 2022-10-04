@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll unsigned long long int
+void midsquare(int ts,ll n)
+{
+  ts=ts-1;
+  int digkey=0;
+  int digts=0;
+  int t=ts;
+  ll c=1,N=1,sq=1,temp=n,ans=1,p=1,q=1;
+  while(n>0)
+  {
+    n=n/10;
+    digkey++;//no. of digits in key
+  }
+  while((ts)>0)
+  {
+      ts=ts/10;// no. of digits in table size like 99 m 2 digit tk ka index
+      digts++;
+  }
+   sq=temp*temp;
+   c=((2*digkey)-digts)/2;// c digits to be removed from last of sq
+   for(int i=1;i<=c;i++)
+   {
+     p*=10;// 10^c
+   }
+   for(int i=1;i<=digts;i++)
+   {
+    q*=10;
+   }
+   
+   N=(sq/p);//removing last c digits from sq
+   ans=N%(q);
+   ans=ans%(t);//if ts is 101 then it will count 3 digits and ans also will have then 3 digits
+   //terefoere 161%100--->61 
+   cout<<ans<<endl;
+}
+int main()
+{
+    int ts;
+    unsigned long long int n;
+    cin>>ts;
+    cin>>n;
+    midsquare(ts,n);
+    
+}
