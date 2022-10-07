@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll  long long int
+int partition(int a[],int low,int high)
+{
+   int i=low;
+   int j=high+1;
+   int pivot=a[low];
+   int mid=(low+high)/2;//condition whwn array is sorted so that worst case o(n^2)
+   swap(a[low],a[mid]);//does not occur known as median quick sort
+   while(i<j)
+   {
+      while(a[i]<=pivot)
+      {
+         i++;
+      }
+      while(a[j]>pivot)
+      {
+         j--;
+      }
+      if(i<j)
+      {
+         swap(a[i],a[j]);
+      }
+   }
+   swap(a[low],a[j]);
+   return j;//position of frezzed index
+}
+void quicksort(int a[],int low,int high)
+{ int k;
+   if(low<high)
+   {
+      k=partition(a,low,high);
+      quicksort(a,low,k-1);
+      quicksort(a,k+1,high);
+   }
+}
+int main()
+{
+   int n;
+   cin>>n;
+   int a[n+1];
+   int low=0,high=n-1;
+   for(int i=0;i<n;i++)
+   {
+      cin>>a[i];
+   }
+   a[n]=INT_MAX;
+   quicksort(a,low,high);
+   for(int i=0;i<n;i++)
+   {
+      cout<<a[i]<<" ";
+   }
+}
