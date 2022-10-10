@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct student{
+   string name;
+   int Rn;
+   int m[6];
+};
+int main()
+{
+   struct student s;
+   cin>>s.name;
+   cin>>s.Rn;
+   float perc;
+   int sum=0;
+   for(int i=0;i<6;i++)
+   {
+     cin>>s.m[i];
+   }
+   sort(s.m,s.m+6);
+    for(int i=5;i>=2;i--)
+    {
+       sum+=s.m[i];
+    }
+    perc=sum/4;
+    if(perc>95)
+    {
+      cout<<"You are eligible";
+    }
+    else
+    cout<<"You are not eligible";
+
+}
