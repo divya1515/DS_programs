@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct student{
+   string name;
+   int Rn;
+   int marks[2];
+};
+int main()
+{
+   struct student s[3];
+   for(int i=0;i<3;i++)
+   {
+      cin>>s[i].name>>s[i].Rn;
+      for(int j=0;j>2;j++)
+      {
+         cin>>s[i].marks[j];
+      }
+   }
+    for(int i=0;i<3;i++)
+   {
+      cout<<s[i].name<<" "<<s[i].Rn<<"\n";
+      cout<<"Marks in 2 subjects"<<"\n";
+      for(int j=0;j>2;j++)
+      {
+         cout<<s[i].marks[j]<<" ";
+      }
+   }
+}
