@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct time{
+   int hr;
+   int min;
+   int sec;
+};
+int main()
+{
+   struct time c[2];
+   int hour,minutes,seconds;
+   for(int i=0;i<2;i++)
+   {
+      cin>>c[i].hr>>c[i].min>>c[i].sec;
+   }
+   seconds=(c[0].sec+c[1].sec)%60;
+   minutes=(c[0].min+c[1].min+(c[0].sec+c[1].sec)/60)%60;
+   int x=(c[0].min+c[1].min+(c[0].sec+c[1].sec)/60)/60;
+   hour=(c[0].hr+c[1].hr+x)%60;
+   cout<<hour<<":"<<minutes<<": "<<seconds<<"\n";
+   
+}
