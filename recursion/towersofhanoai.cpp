@@ -19,4 +19,4 @@ int main()
     cin>>n;
     char s,m,d;
     towersofhanoai(n,'s','m','d');
-}
+}//(2^n)-1 steps where n are the no. of disk
