@@ -51,7 +51,13 @@ char StackTop()
 }
 int precd(char a, char b)
 {
-    if (a == '^' || a == '*' || a == '%' || a == '/')
+    if (a == '(' || b == '(')
+        return 0;
+    if (a != '(' && b == ')')
+        return 1;
+    else if (a == '(' && b == ')')
+        return 0;
+    else if (a == '^' || a == '*' || a == '%' || a == '/')
     {
         if (b == '^')
             return 0;
@@ -85,10 +91,16 @@ void infixtopostfix(char infix[])
             while (!IsEmpty() && precd(StackTop(), symbol))
             {
                 x = pop();
+
                 postfixexp[p] = x;
                 p++;
             }
-            push(symbol);
+            if (symbol != ')')
+            {
+                push(symbol);
+            }
+            else
+                pop();
         }
         i++;
     }
@@ -98,7 +110,7 @@ void infixtopostfix(char infix[])
         postfixexp[p] = y;
         p++;
     }
-    postfixexp[p]='\0';
+    postfixexp[p] = '\0';
 
     printf("%s", postfixexp);
 }
