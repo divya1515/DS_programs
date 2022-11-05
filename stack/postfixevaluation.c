@@ -50,13 +50,13 @@ int evaluate(int a,int b,char op)
     {
         case '+':return a+b;
         break;
-        case '-':return b-a;
+        case '-':return a-b;
         break;
         case '*':return a*b;
         break;
-        case '/':return b/a;
+        case '/':return a/b;
         break;
-        case '^':return pow(a,b);
+        case '^':return pow(b,a);
         break;
     }
 }
@@ -70,8 +70,8 @@ void infix(char str[20])
         push(str[i]-'0');
         i++;
     }
-     int a=pop();
      int b=pop();
+     int a=pop();
      int value=evaluate(a,b,str[i]);
       push(value);
       i++;
