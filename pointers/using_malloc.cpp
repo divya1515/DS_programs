@@ -1,27 +1,23 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define ll long long 
-int main()
+void iou(int *ptr,int n)
 {
-    int *p;
-    p=(int*)malloc(40);
-    for(int i=0;i<7;i++)
+     for(int i=0;i<n;i++)
     {
-        scanf("%d",(p+i));
+        scanf("%d",(ptr+i));
     }
-    for(int i=0;i<7;i++)
+     for(int i=0;i<n;i++)
     {
-        printf("%d",*(p+i));
+        printf("%d",*(ptr+i));
     }
-    char *ptr;
-    ptr=(char*)malloc(10);
-    for(int i=0;i<10;i++)
-    {
-        scanf("%c",(ptr+i));
-    }
-    for(int i=0;i<10;i++)
-    {
-        printf("%c",*(ptr+i));
-    }
+}
+int main()
+{ 
+    int n;
+    cin>>n;
+    int *ptr;
+   
+    ptr=(int*)malloc(n*sizeof(int));
+    iou(ptr,n);
 
 }
