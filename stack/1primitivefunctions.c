@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
-#define stacksize 3
+#define stacksize 30
 #define true 1
 #define false 0
 struct stack{
@@ -12,14 +12,14 @@ void Initialize()
 {
    s.top=-1;
 }
-void IsEmpty()
+int IsEmpty()
 {
     if(s.top==-1)
     {
-        printf("Stack is empty\n");
+       return 1;
     }
     else
-    return;
+    return 0;
 }
 void push(int x)
 {
@@ -55,7 +55,7 @@ int main()
    printf("POPED element: %d\n",x);
     x=pop();
      printf("POPED element: %d",x);
-     IsEmpty();
+     printf("%d\n",IsEmpty());
 
 
 }
