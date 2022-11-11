@@ -1,4 +1,5 @@
 #include<stdlib.h>
+#include<stdio.h>
 #define stacksize 3
 #define true 1
 #define false 0
