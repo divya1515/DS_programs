@@ -70,14 +70,4 @@ int main()
    Insertend(&start,30);
    printf("Linked list before insertion\n");
    traverse(start);
-   struct node*p=start;
-   int d;
-   scanf("%d",&d);//position after which the no. to be inserted
-   for(int i=1;i<d;i++)
-   {
-      p=p->next;
-   }
-   InsertAfter(p,67);//no. to be inserted is 67
-  printf("Linked list after insertion\n");
-   traverse(start);
 }
