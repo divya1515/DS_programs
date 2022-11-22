@@ -115,6 +115,6 @@ int main()
    Insertend(&start, 700);
    Insertend(&start, 800);
    traverse(start);
-   Make_Cycle(1, 7, &start);
+   Make_Cycle(1, 7, &start);//1 based indexing(1 and 7 are indexes from where the elements start repeating)
    Cycle_detection(&start);
 }
