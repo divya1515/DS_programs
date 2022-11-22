@@ -149,7 +149,7 @@ int main()
    Insertend(&start, 700);
    Insertend(&start, 800);
    traverse(start);
-   Make_Cycle(1, 7, &start); // 1 based indexing
+   Make_Cycle(2, 7, &start); // 1 based indexing(2 and 7 are indexes in between the cycle should be made)
    Cycle_detection(&start);
    cycle_length(&start);
 }
