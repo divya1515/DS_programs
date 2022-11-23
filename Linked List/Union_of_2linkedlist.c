@@ -82,7 +82,7 @@ void Ordered_Insertion(struct node **start, int x)
    else
       InsertAfter(q, x);
 }
-void Merge_sorted(struct node **start1, struct node **start2,struct node **start3)
+void Union(struct node **start1, struct node **start2,struct node **start3)
 {
    struct node *p;
    struct node *q;
@@ -140,6 +140,7 @@ int main()
    traverse(start1);
    struct node *start3;
    start3=NULL;
-   Merge_sorted(&start, &start1,&start3);
+   Union(&start, &start1,&start3);
+   printf("Union of 2 linked list ");
    traverse(start3);
 }
