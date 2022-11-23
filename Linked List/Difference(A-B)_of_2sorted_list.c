@@ -129,6 +129,6 @@ int main()
    struct node *start3;
    start3=NULL;
    Difference(&start, &start1,&start3);
-   printf("Intersection linked list: ");
+   printf("Difference of 2 sorted linked list: ");
    traverse(start3);
 }
