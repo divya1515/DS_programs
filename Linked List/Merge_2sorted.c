@@ -88,7 +88,7 @@ void Merge_sorted(struct node **start1, struct node **start2,struct node **start
    struct node *q;
    p=*start1;
    q=*start2;
-   while(p->next!=NULL && q->next!=NULL)
+   while(p!=NULL && q!=NULL)
    {
       if(p->info<q->info)
       {
