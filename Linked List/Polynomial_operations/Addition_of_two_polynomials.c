@@ -1,3 +1,4 @@
+//Assumption: exponent of x(power of x)will be given in decreasing order like x^5+x^3+x^2..
 #include <stdlib.h>
 #include <stdio.h>
 struct node
