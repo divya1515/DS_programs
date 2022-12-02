@@ -51,7 +51,7 @@ struct node *pattern(struct node **cstart)
     int sum=0;
     while(p!=*cstart)
     {
-      sum=sum+p->info;
+      sum=sum+p->info;  // sum of whole linked list by traversing every node
       p=p->next;
     }
     sum=sum+p->info;
