@@ -243,7 +243,7 @@ int main()
    struct node *p;
    p = dstart;
    int d;
-   scanf("%d", &d); // position after which we want to delete or before which we are need to delete
+   scanf("%d", &d); // position after which we want to delete or (before insert) or before which we need to delete or (after insert)
    if (d == 0)
       p = NULL;
    for (int i = 1; i < d; i++)
