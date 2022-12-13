@@ -1,3 +1,4 @@
+//merging point or to find intersecting point
 #include <bits/stdc++.h>
 using namespace std;
 class Node
