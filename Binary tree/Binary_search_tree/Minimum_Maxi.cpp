@@ -74,8 +74,6 @@ void Maximum(Node *&root)
 int main()
 {
    Node *root = NULL;
-   int x;
-   cin >> x;
    InsertBinary_Search_tree(root, 500);
    InsertBinary_Search_tree(root, 200);
    InsertBinary_Search_tree(root, 10);
