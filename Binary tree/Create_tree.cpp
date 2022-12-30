@@ -42,13 +42,13 @@ void PostorderTraversal(Node *&root)
 }
 void CreateTree(Node *&root)
 {
-    int ch;
+     int ch;
    cout<<"Enter choice whether left of "<<root->data<<" exist or not(1/0)"<<"\n";
    cin>>ch;//if left node exist then ch=1 else ch=0
    if(ch==1)
    {
-      int d;
       cout<<"Enter left data for "<<root->data<<": ";
+      int d;
       cin>>d;
       root->left=new Node(d);
       CreateTree(root->left);
@@ -57,9 +57,9 @@ void CreateTree(Node *&root)
    cin>>ch;//if right node exist then ch=1 else ch=0
    if(ch==1)
    {
+     cout<<"Enter right data for "<<root->data<<": ";
      int d;
      cin>>d;
-     cout<<"Enter right data for "<<root->data<<": ";
      root->right=new Node(d);
      CreateTree(root->right);
    }
