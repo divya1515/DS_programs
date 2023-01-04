@@ -2,10 +2,13 @@
 using namespace std;
 void BFS(vector<int>AdjList[],int v)
 {
+   vector<int>pred(v,-1);
    vector<int>visited(v);
+   vector<int>dist(v);
    queue<int>q;
    q.push(0);
    visited[0]=1;
+   cout<<"BFS: ";
    while(!q.empty())
    {
       int x=q.front();
@@ -15,11 +18,20 @@ void BFS(vector<int>AdjList[],int v)
          if(visited[AdjList[x][i]]==0)
          {
             q.push(AdjList[x][i]);
+            pred[AdjList[x][i]]=x;
+            dist[AdjList[x][i]]=dist[x]+1;
             visited[AdjList[x][i]]=1;
          }
       }
       cout<<x<<" ";
    }
+   cout<<"\n";
+   for(int i=0;i<v;i++)
+   {
+      cout<<dist[i]<<" "<<pred[i];// distance and predeccor of bfs elements
+      cout<<endl;
+   }
+   cout<<"\n";
 }
 int main()
 {
