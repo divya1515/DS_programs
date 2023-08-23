@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node *left;
+    node *right;
+    node(int data)
+    {
+        this->data=data;
+        this->left=NULL;
+        this->right=NULL;
+    }
+};
+int childreSumProperty(node *&root)
+{
+    if(!root) return 0;
+    int x=0;
+    if(root->left)
+    x+=root->left->data;
+    if(root->right)
+    x+=root->right->data;
+    if(root->data>x)
+    {
+        if(root->left)
+        root->left->data=root->data;
+         if(root->right)
+         root->right->data=root->data;
+    }
+    int left=childreSumProperty(root->left);
+    int right=childreSumProperty(root->right);
+    root->data=max(left+right,root->data);
+    return root->data;
+    
+}
+void Level_order_traversal(node *&root)
+{
+    queue<node *> q;
+    node *p = root;
+    q.push(p);
+    q.push(NULL);
+    while (!q.empty())
+    {
+        node *temp = q.front();
+        q.pop();
+        if (temp == NULL)
+        {
+            cout << endl;
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
+        }
+        else
+        {
+            cout << temp->data<<" ";
+            if (temp->left != NULL)
+            {
+                q.push(temp->left);
+            }
+            if (temp->right != NULL)
+                q.push(temp->right);
+        }
+    }
+}
+int main()
+{
+    node *root=new node(2);
+    root->left=new node(35);
+    root->right=new node(1);
+    root->left->left=new node(8);
+    root->left->right=new node(9);
+    root->right->left=new node(10);
+    root->right->right=new node(3);
+    root->left->left->left=new node(9);
+    root->left->left->right=new node(10);
+     root->left->right->left=new node(11);
+    int p=childreSumProperty(root);
+    Level_order_traversal(root);
+    
+}
