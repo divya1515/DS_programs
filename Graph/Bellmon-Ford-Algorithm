@@ -1,0 +1,32 @@
+ vector<int> bellman_ford(int V, vector<vector<int>>& edges, int S) {
+        // Code here
+        vector<int>dis(V,1e8);
+        dis[S]=0;
+        int u,v,d;
+        int temp=V,flg=0;
+        while(1)
+        {
+            flg=0;
+            for(int i=0;i<edges.size();i++)
+            {
+                u=edges[i][0];
+                v=edges[i][1];
+                d=edges[i][2];
+                if(dis[u]!=1e8 && (dis[u]+d)<dis[v])
+                {
+                    flg=1;
+                dis[v]=dis[u]+d;
+                }
+            }
+            if(temp==-1 && flg==1)
+            {
+             vector<int>a({-1}); // If there is negative cycle in the graph then there will be updation in the dis vector for greater the V iterations
+             return a;
+            }
+            if(temp<0) // when V+1 iterations are completed and there is no updation in dis graph
+            break;
+            temp--;
+            
+        }
+        return dis;
+    }
