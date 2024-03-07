@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+class DisjointSet{
+    vector<int>parent;
+    vector<int>rank;
+    vector<int>size;
+    public:
+    DisjointSet(int n){
+        parent.resize(n+1);
+        rank.resize(n+1,0);
+        size.resize(n+1,1);
+        for(int i=0;i<=n;i++)
+        parent[i]=i;
+    }
+    int Ultimate_parent(int x)
+    {
+        if(parent[x]==x)
+        return x;
+        return parent[x]=Ultimate_parent(parent[x]);
+    }
+    void UnionByRank(int u,int v)
+    {
+        int pu=Ultimate_parent(u);
+        int pv=Ultimate_parent(v);
+        int ru=rank[pu];
+        int rv=rank[pv];
+        if(ru>=rv)
+        {
+            parent[pv]=pu;
+            if(ru==rv)
+            rank[pu]+=1;
+        }
+        else
+        parent[pu]=pv;
+    }
+    void UnionBySize(int u,int v)
+    {
+        int pu=Ultimate_parent(u);
+        int pv=Ultimate_parent(v);
+        int su=size[pu];
+        int sv=size[pv];
+        if(su>=sv)
+        {
+            parent[pv]=pu;
+            size[pu]+=sv;
+        }
+        else
+        {
+        parent[pu]=pv;
+        size[pv]+=su;
+        }
+    }
+    
+};
+int main(){
+    DisjointSet ds(7);
+    ds.UnionBySize(1,2);
+    ds.UnionBySize(2,3);
+    ds.UnionBySize(4,5);
+    ds.UnionBySize(6,7);
+    ds.UnionBySize(5,6);
+    if(ds.Ultimate_parent(3)!=ds.Ultimate_parent(7))
+    cout<<"NOT SAME"<<"\n";
+    ds.UnionBySize(3,7);
+    if(ds.Ultimate_parent(3)==ds.Ultimate_parent(7))
+    cout<<"SAME";
+}
