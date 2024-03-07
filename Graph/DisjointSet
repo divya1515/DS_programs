@@ -12,7 +12,7 @@ class DisjointSet{
         for(int i=0;i<=n;i++)
         parent[i]=i;
     }
-    int Ultimate_parent(int x)
+    int Ultimate_parent(int x)//Finding the Topmost Parent
     {
         if(parent[x]==x)
         return x;
@@ -22,11 +22,11 @@ class DisjointSet{
     {
         int pu=Ultimate_parent(u);
         int pv=Ultimate_parent(v);
-        int ru=rank[pu];
+        int ru=rank[pu]; 
         int rv=rank[pv];
-        if(ru>=rv)
+        if(ru>=rv) // If rank of pv is smaller then rank of pu then connecting the smaller component(pv) to larger component
         {
-            parent[pv]=pu;
+            parent[pv]=pu; //Changing the parent of smaller component
             if(ru==rv)
             rank[pu]+=1;
         }
@@ -59,9 +59,9 @@ int main(){
     ds.UnionBySize(4,5);
     ds.UnionBySize(6,7);
     ds.UnionBySize(5,6);
-    if(ds.Ultimate_parent(3)!=ds.Ultimate_parent(7))
+    if(ds.Ultimate_parent(3)!=ds.Ultimate_parent(7)) // Till here 3 and 7 are not belonging to same component
     cout<<"NOT SAME"<<"\n";
-    ds.UnionBySize(3,7);
+    ds.UnionBySize(3,7); // Now addedd to same Component
     if(ds.Ultimate_parent(3)==ds.Ultimate_parent(7))
     cout<<"SAME";
 }
