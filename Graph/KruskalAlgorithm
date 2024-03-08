@@ -1,0 +1,98 @@
+class DisjointSet
+{
+	    vector<int>parent;
+	    vector<int>size;
+	    vector<int>rank;
+	    public:
+	     DisjointSet(int n){
+	        parent.resize(n+1);
+	        rank.resize(n+1,0);
+	        size.resize(n+1,1);
+	        for(int i=0;i<(n+1);i++)
+	        parent[i]=i;
+	    }
+	    int Ultimate_Parent(int x)
+	    {
+	        if(parent[x]==x)
+	        return x;
+	        return parent[x]=Ultimate_Parent(parent[x]);
+	    }
+	    void UnionBySize(int u,int v)
+	    {
+	        int pu=Ultimate_Parent(u);
+	        int pv=Ultimate_Parent(v);
+	        int su=size[pu];
+	        int sv=size[pv];
+	        if(su>=sv)//pu-->greter component,pv-->smaller component connet pv to pu
+	        {
+	            parent[pv]=pu;
+	            size[pu]+=sv;
+	        }
+	        else
+	        {
+	            parent[pu]=pv;
+	            size[pv]+=su;
+	        }
+	    }
+	     void UnionByRank(int u,int v)
+	    {
+	        int pu=Ultimate_Parent(u);
+	        int pv=Ultimate_Parent(v);
+	        int ru=rank[pu];
+	        int rv=rank[pv];
+	        if(ru>=rv)//pu-->greter component,pv-->smaller component connet pv to pu
+	        {
+	            parent[pv]=pu;
+	            if(ru==rv)
+	             rank[pu]+=1;
+	        }
+	        else
+	        {
+	            parent[pu]=pv;
+	           
+	        }
+	    }
+	};
+	
+
+class Solution
+{
+	public:
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+	
+    int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        vector<pair<int,pair<int,int>>>vp;
+       for (int i = 0; i < V; i++) {
+            for (auto it : adj[i]) {
+                int adjNode = it[0];
+                int wt = it[1];
+                int node = i;
+
+                vp.push_back({wt, {node, adjNode}});
+            }
+        }
+
+        sort(vp.begin(),vp.end());
+        DisjointSet ds(V);
+        int sum=0;
+         for(int i=0;i<vp.size();i++)
+        {
+            auto g=vp[i];
+            int u=g.second.first;
+            int v=g.second.second;
+            int w=g.first;
+            int pu=ds.Ultimate_Parent(u);
+            int pv=ds.Ultimate_Parent(v);
+            if(pu!=pv)
+            {
+                
+                sum+=w;
+                ds.UnionBySize(pu,pv);
+            }
+            
+        }
+        return sum;
+    }
+};
