@@ -1,0 +1,85 @@
+class DisjointSet{
+    vector<int>parent;
+    vector<int>size;
+    public:
+    DisjointSet(int n)
+    {
+        parent.resize(n+1,0);
+        size.resize(n+1,1);
+        for(int i=0;i<=n;i++)
+        {
+            parent[i]=i;
+        }
+    }
+    int Ult_parent(int x)
+    {
+        if(parent[x]==x)
+        {
+            return x;
+        }
+        return parent[x]=Ult_parent(parent[x]);
+    }
+    void UnionBySize(int u,int v)
+    {
+        int pu=Ult_parent(u);
+        int pv=Ult_parent(v);
+        int su=size[pu];
+        int sv=size[pv];
+        if(su>=sv)
+        {
+            parent[pv]=pu;
+            size[pu]+=sv;
+        }
+        else
+        {
+            parent[pu]=pv;
+            size[pv]+=su;
+        }
+    }
+};
+class Solution {
+  public:
+    vector<int> numOfIslands(int n, int m, vector<vector<int>> &opt) {
+        // code here
+        DisjointSet ds(n*m);
+        vector<int>ans;
+        int x,y;
+        int prev=0;
+        set<pair<int,int>>st;
+        for(int i=0;i<opt.size();i++)
+        {
+            x=opt[i][0];
+            y=opt[i][1];
+            if(st.find({x,y})!=st.end())
+            {
+                ans.push_back(prev);
+                continue;
+            }
+            prev++;
+            if((x-1)>=0 && st.find({x-1,y})!=st.end() && ds.Ult_parent((x*m)+y)!=ds.Ult_parent(((x-1)*m)+y))
+            {
+                ds.UnionBySize((x*m)+y,((x-1)*m)+y);
+                prev--;
+            }
+             if((y-1)>=0 && st.find({x,y-1})!=st.end() && ds.Ult_parent((x*m)+y)!=ds.Ult_parent((x*m)+y-1))
+            {
+                ds.UnionBySize((x*m)+y,(x*m)+y-1);
+                prev--;
+            }
+             if((x+1)<n && st.find({x+1,y})!=st.end() && ds.Ult_parent((x*m)+y)!=ds.Ult_parent(((x+1)*m)+y))
+            {
+                ds.UnionBySize((x*m)+y,((x+1)*m)+y);
+                prev--;
+            }
+             if((y+1)<m && st.find({x,y+1})!=st.end() && ds.Ult_parent((x*m)+y)!=ds.Ult_parent((x*m)+y+1))
+            {
+                ds.UnionBySize((x*m)+y,(x*m)+y+1);
+                prev--;
+            }
+            st.insert({x,y});
+            ans.push_back(prev);
+            
+        }
+        return ans;
+    }
+};
