@@ -1,0 +1,135 @@
+#include <bits/stdc++.h> 
+using namespace std;
+class node{
+    vector<
+    pair<node*,int>
+    >
+    links;
+    pair<bool,int>flag;
+    public:
+    node(){
+        for(int i=0;i<26;i++)
+        {
+            links.push_back({NULL,0});
+        }
+        flag={false,0};
+    }
+    bool containsKey(char ch)
+    {
+        return (links[ch-'a'].first!=NULL);
+    }
+    void put(char ch)
+    {
+        links[ch-'a'].first=new node();
+    }
+    node* get(char ch)
+    {
+        return links[ch-'a'].first;
+    }
+    void increasecnt(char ch)
+    {
+        links[ch-'a'].second+=1;
+    }
+    void setEnd()
+    {
+        flag={true,flag.second+1};
+    }
+    int getcnt(char ch) {
+         return links[ch - 'a'].second; 
+         }
+    pair<bool,int> getEnd()
+    {
+        return {flag.first,flag.second};
+    }
+    void decreasecnt(char ch)
+    {
+        links[ch-'a'].second--;
+    }
+    void freeitsref(char ch)
+    {
+        links[ch-'a'].first=NULL;
+        links[ch-'a'].second=0;
+    }
+    void decreaseEnd()
+    {
+        flag.second--;
+    }
+};
+class Trie{
+   private:
+   node *root;
+    public:
+
+    Trie(){
+        // Write your code here.
+        root=new node();
+    }
+
+    void insert(string &word){
+        // Write your code here.
+        node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+           if(!curr->containsKey(word[i]))
+           {
+               curr->put(word[i]);
+           }
+           curr->increasecnt(word[i]);
+           curr=curr->get(word[i]);
+        }
+        curr->setEnd();
+    }
+
+    int countWordsEqualTo(string &word){
+        // Write your code here.
+        node *curr=root;
+        int cnt=0;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!curr->containsKey(word[i]))
+            return 0;
+            cnt=curr->getcnt(word[i]);
+            curr=curr->get(word[i]);
+            
+        }
+        if(curr->getEnd().first==true)
+        return curr->getEnd().second;
+        return 0;
+    }
+
+    int countWordsStartingWith(string &word){
+        // Write your code here.
+         node *curr=root;
+        int cnt=0;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!curr->containsKey(word[i]))
+            return 0;
+            cnt=curr->getcnt(word[i]);
+            curr=curr->get(word[i]);
+            
+        }
+       
+        return cnt;
+        
+    }
+
+    void erase(string &word){
+        // Write your code here.
+        node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+            curr->decreasecnt(word[i]);
+            if(curr->getcnt(word[i])==0)
+            {
+                curr->freeitsref(word[i]);
+                break;
+            }
+            curr=curr->get(word[i]);
+        }
+        if(curr->getEnd().first==true)
+        {
+           curr->decreaseEnd();
+        }
+    }
+};
