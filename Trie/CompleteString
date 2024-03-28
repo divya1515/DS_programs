@@ -1,0 +1,97 @@
+#include <bits/stdc++.h> 
+class node{
+    node *links[26];
+    bool flag=false;
+    public:
+    node(){
+        for(int i=0;i<26;i++)
+        links[i]=NULL;
+        flag=false;
+    }
+    bool containsKey(char ch)
+    {
+        return (links[ch-'a']!=NULL);
+    }
+    void put(char ch)
+    {
+        links[ch-'a']=new node();
+    }
+    node* get(char ch)
+    {
+       return links[ch-'a'];
+    }
+    void setEnd()
+    {
+        flag=true;
+    }
+    bool checkflag()
+    {
+        return (flag==true);
+    }
+};
+class Trie{
+    node *root;
+    public:
+    Trie(){
+          root=new node();
+    }
+    void insert(string &word)
+    {
+        node *curr=root;
+        for(int i=0;i<word.length();i++)
+        {
+            if(!curr->containsKey(word[i]))
+            {
+                curr->put(word[i]);
+            }
+            curr=curr->get(word[i]);
+
+        }
+        curr->setEnd();
+    }
+    bool check(string s)
+    {
+        node *curr=root;
+        int i=0;
+        node *g;
+        while(i<s.length())
+        {
+            g=curr->get(s[i]);
+            if(g->checkflag()==false)
+            {
+                return false;
+            }
+            curr=curr->get(s[i]);
+           i++;
+        }
+        return true;
+    }
+};
+static bool cmp(const string a,const string b)
+{
+    if(a.length()!=b.length())
+    return a.length()<b.length();
+    return (a>b);
+
+}
+string completeString(int n, vector<string> &a){
+    // Write your code here.
+    Trie *obj=new Trie();
+    priority_queue<string,vector<string>,decltype(&cmp)> pq(cmp);
+    for(int i=0;i<n;i++)
+    {
+        obj->insert(a[i]);
+    }
+    for(int i=0;i<n;i++)
+    {
+        string s=a[i];
+        if(obj->check(s)==true)
+        {
+           pq.push(s);
+        }
+    }
+    if(pq.empty())
+    return "None";
+    return pq.top();
+
+}
