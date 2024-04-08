@@ -4,6 +4,81 @@ class DisjointSet{
     public:
     DisjointSet(int n)
     {
+        parent.resize(n+1);
+        size.resize(n+1,1);
+        for(int i=0;i<=n;i++)
+        parent[i]=i;
+    }
+    int Ultimate_parent(int x)
+    {
+        if(parent[x]==x)
+        return x;
+        return parent[x]=Ultimate_parent(parent[x]);
+    }
+    void UnionBySize(int u,int v)
+    {
+        int pu=Ultimate_parent(u);
+        int pv=Ultimate_parent(v);
+        int spu=size[pu];
+        int spv=size[pv];
+        if(spu>=spv)
+        {
+            parent[pv]=pu;
+            size[pu]+=size[pv];
+        }
+        else
+        {
+            parent[pu]=pv;
+            size[pv]+=size[pu];
+        }
+    }
+};
+class Solution {
+  public:
+    vector<int> numOfIslands(int n, int m, vector<vector<int>> &op) {
+        // code here
+        vector<vector<int>>visited(n,vector<int>(m,0));
+        DisjointSet ds(n*m);
+        int x,y;
+        vector<int>dr{-1,1,0,0};
+        vector<int>dc{0,0,-1,1};
+        int a,b;
+        vector<int>res(op.size());
+        int ans=0;
+        for(int i=0;i<op.size();i++)
+        {
+            x=op[i][0];
+            y=op[i][1];
+            if(visited[x][y]==0)
+            {
+                ans++;
+                visited[x][y]=1;
+                for(int j=0;j<4;j++)
+                {
+                    a=x+dr[j];
+                    b=y+dc[j];
+                    if(a>=0 && a<n && b>=0 && b<m && visited[a][b]==1 && ds.Ultimate_parent((a*m)+b)!=ds.Ultimate_parent((x*m)+y))
+                    {
+                        ds.UnionBySize((a*m)+b,(x*m)+y);
+                        ans--;
+                    }
+                }
+            }
+            res[i]=ans;
+            
+        }
+        return res;
+    }
+};
+
+
+*********************************************************************************************************************************************************************
+class DisjointSet{
+    vector<int>parent;
+    vector<int>size;
+    public:
+    DisjointSet(int n)
+    {
         parent.resize(n+1,0);
         size.resize(n+1,1);
         for(int i=0;i<=n;i++)
